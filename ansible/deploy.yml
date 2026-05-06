@@ -1,0 +1,7 @@
+- hosts: web
+  tasks:
+
+  - name: Copy website
+    copy:
+      src: ../index.html
+      dest: /usr/share/nginx/html/Midterm-2026/SOEUN_Sereyvath/index.html
