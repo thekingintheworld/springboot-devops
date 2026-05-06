@@ -5,13 +5,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                bat 'mvn clean package'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'cd ansible && ansible-playbook -i inventory.ini deploy.yml'
+                bat 'ansible-playbook ansible/deploy.yml -i ansible/inventory.ini'
             }
         }
 
@@ -21,15 +21,15 @@ pipeline {
 
         success {
             mail to: 'Sinavathtra01@gmail.com',
-            subject: "Build Success",
-            body: "Website deployed successfully: http://178.128.93.188/Midterm-2026/SOEUN_Sereyvath"
+            subject: 'Build Success - SOEUN_Sereyvath',
+            body: 'Website deployed: http://178.128.93.188/Midterm-2026/SOEUN_Sereyvath'
         }
 
         failure {
             mail to: 'Sinavathtra01@gmail.com',
-            subject: "Build Failed",
-            body: "The Jenkins build failed. Please check Jenkins logs."
+            subject: 'Build Failed - SOEUN_Sereyvath',
+            body: 'Build failed. Check Jenkins console output.'
         }
 
     }
-}         
+}
